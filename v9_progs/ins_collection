@@ -1,0 +1,2 @@
+# collection install  ./sudo
+ansible-galaxy collection install community.network

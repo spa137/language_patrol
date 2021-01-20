@@ -1,0 +1,137 @@
+# SPA IT - мовний патруль
+# 
+[MikroTik]
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми увімкнемо маскарадінг MikroTik.
+
+Для цього буде додано рядок до налаштувань пристрою:
+
+/ip firewall nat add chain=srcnat action=masquerade out-interface=ether1
+
+
+Маскарадінг - тип трансляції мережевих адрес, при якій адреси клієнтів 
+замінюються на адреси посередника динамічно,
+залежно від адреси посередника.
+
+ 
+Використовуємо Cloud Hosted Router, що встановлено у віртуальну машину 
+
+Cloud Hosted Router
+Наразі існує два інтерфейси мережі -
+ether2 - внутрішня мережа, необхідно встановити ip 10.0.0.1/24.  
+ether 1 - проміжний адаптер 
+(віртуальний хост знаходиться в мережі хоста віртуалізації)
+отримує адресу динамічно (протокол DHCP).
+
+Клієнт має 1 інтерфейс, внутрішня мережа.
+Win7 з налаштуваннями -
+ip 10.0.0.23/24
+шлюз 10.0.0.1
+
+             
+Клонуємо актуальні файли Мовного_Патруля та прямуємо до теки застосунків.
+mkdir teka_f && cd teka_f && git clone https://github.com/spa137/language_patrol 
+
+
+host_clear (інвентарний файл, де вказано DHCP адресу)
+ 
+[mikrotik]                                                                                                                            
+192.168.88.220 ansible_user=admin ansible_network_os=routeros ansible_ssh_port=22 
+
+
+
+плейбук
+ansible-playbook -i host_clear masc_add_ip.yml.draft
+
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:
+  - name: new CHR for labs
+    routeros_command:
+      commands:
+# встановлюємо адреси
+        - /ip address add address=192.168.88.34/24 interface=ether1
+        - /ip address add address=10.0.0.1/24 interface=ether2
+# зносимо запис, якщо плейбук використано не перший раз
+        - /ip firewall nat remove 0
+# налаштування маскарадінгу ether1
+        - /ip firewall nat add chain=srcnat action=masquerade out-interface=ether1
+    register: adre_print
+  - name: debug print
+    debug: var=adre_print.stdout_lines
+
+
+
+Адреси та маскарадинг встановлено. 
+Клієнт має доступ у глобальну мережу.
+
+
+
+
+
+
+
+ 
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+

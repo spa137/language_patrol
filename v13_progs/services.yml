@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+   - name: start a service
+     win_service:
+       name: spooler
+       state: started
+
+   - name: Get ser facts
+     win_command: sc query spooler
+     register: usage
+
+   - debug: msg="{{ usage.stdout }}"

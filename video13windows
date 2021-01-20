@@ -1,0 +1,225 @@
+# SPA IT - мовний патруль
+# 
+[windows]
+https://docs.ansible.com/ansible/latest/collections/chocolatey/chocolatey/win_chocolatey_module.html
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми вивчаємо автоматизацію встановлення та видалення
+застосунків за допомогою chocolatey 
+
+
+
+Клонуємо актуальні файли Мовного_Патруля та прямуємо до теки застосунків.
+mkdir teka_f && cd teka_f && git clone https://github.com/spa137/language_patrol 
+
+На Linux хост, з якого ми керуємо інфраструктурою, -
+встановимо ansible-galaxy collection chocolatey
+за допомогою команди, яку необхідно виконати від суперюзера
+
+ansible-galaxy collection install chocolatey.chocolatey
+
+
+У теці знайдете inst_winrm.ps1 - інструкції PowerShell для встановлення WinRM
+Нажаль, Ansible за допомогою SSH працює нестабільно, тому використовуємо саме WinRM.
+Найпростійше - запустити PowerShell з адміністративними правами 
+та рядок за рядком виконати ці чотири вказівки.
+
+[inst_winrm.ps1]
+# WinRM install powershell http://onreader.mdl.ru/MasteringAnsible.3ed/content/Ch03.html
+$ansibleconfigurl = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
+$ansibleconfig = "$env:temp\ConfigureRemotingForAnsible.ps1"
+(New-Object -TypeName System.Net.WebClient).DownloadFile($ansibleconfigurl, $ansibleconfig)
+powershell.exe -ExecutionPolicy ByPass -File $ansibleconfig
+
+
+Відповідно змінивсь файл host.
+Доречі, у файлі використано трохи інший синтаксис - змінні для хостів 
+windows вказано в блоці windows:vars
+Це більш людяно. 
+ 
+[host]
+
+|  [windows]
+|  192.168.88.53
+|
+|  [windows:vars]
+|  ansible_user=sw
+|  ansible_password="123"
+|  ansible_port=5986
+|  ansible_connection=winrm
+|  ansible_winrm_server_cert_validation=ignore
+
+Перевірка з'єднання відрізняється від Linux-систем.
+
+ansible  -m win_ping all
+
+Для встановлення застосунків будемо використовувати пакентний менеджер chocolatey.
+Його інсталюємо за допомогою скрипта install_chocolatey.yml.
+
+---
+- name: "Chocolatey"
+  hosts: windows
+  tasks:
+    - name: Install chocolatey
+      win_chocolatey:
+          name:
+           - chocolatey
+           - chocolatey-core.extension
+          state: present
+
+Тепер працювати з застосунками майже так легко, як у Linux.
+
+Встановлення застосунків install_multiple.yml
+
+---
+- hosts: all
+  tasks:
+  - name: Install multiple packages sequentially
+    win_chocolatey:
+      name: '{{ item }}'
+      state: present
+    loop:
+    - sysinternals
+    - putty
+    - windirstat
+    - googlechrome
+    - firefox
+    - notepadplusplus.install
+    - vlc
+    - skype
+    - openoffice
+
+Видалення:
+
+uninstall_multiple.yml
+
+
+---
+- hosts: all
+  tasks:
+  - name: Install multiple packages sequentially
+    win_chocolatey:
+      name: '{{ item }}'
+      state: absent
+    loop:
+    - sysinternals
+    - putty
+    - windirstat
+    - googlechrome
+    - firefox
+    - notepadplusplus.install
+    - vlc
+    - skype
+    - openoffice
+
+Всі наведені застосунки - в теці патруля.
+Клонуйте, форкайте, вивчайте та редагуйте.
+Робіть pull-реквести.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Файл встановлення застосунків  
+
+[]
+
+
+
+
+Файл видалення застосунків 
+
+
+[]
+ 
+Також у теці наведено кілька популярних плейбуків.
+
+Встановимо та видалемо один з застосунків за допомогою плейбуків.
+
+ansible-playbook
+ansible-playbook 
+
+
+
+
+
+
+
+ 
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+

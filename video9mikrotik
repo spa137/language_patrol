@@ -1,0 +1,157 @@
+
+# SPA IT - мовний патруль
+# мережа
+[MikroTik/Ansible]
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми за допомогою Ansible перезавантажемо Mikrotik.
+
+Ansible  ми встановили у відео - 5.
+Для роботи з MikroTik знадобиться встановити ще кілька компонентів.
+
+
+git clone https://github.com/spa137/language_patrol.git
+cd v9_progs
+
+Необхідно виконати від sudo застосунки:
+
+ins_collection
+install_paramiko
+
+Вивчимо інші файли, що знаходяться у теці v9_progs
+
+|  host   Інвентарний файл. 
+     Містить адресу пристроїв (іх може бути кілька) та змінні, які зберігають, наприклад, логін та пароль.
+|  [mikrotik]
+|  192.168.88.34  ansible_user=admin ansible_network_os=routeros ansible_ssh_pass=123 ansible_ssh_port=22
+
+
+
+|  ansible.cfg  Містить налаштування.
+     Найважливійші налаштування: 
+|  forks          = 2      кількість одночасних процесів обробки
+|  inventory      = host   де знаходиться інформація про цілі за замовченням
+
+|  reboot_mk.yml
+     Файл, який містить команду перезавантаження пристрою.
+
+|  ---
+|  - hosts: all                    Застосувати до всіх пристроїв з інвентарного файлу
+|    gather_facts: False           Не збирати додаткову інформацію про цілі
+|    connection: network_cli       Тип з'єднання
+|    tasks:                        Завдання
+|    - name: reboot device         Назва завдання
+|      routeros_command:
+|        commands: ":execute {/system reboot};"
+
+
+
+Перезавантажемо роутер, запустивши плейбук reboot_mk.yml
+ansible-playbook reboot_mk.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------
+Модель OSI базова еталонна модель взаємодії відкритих систем,
+англ. Open Systems Interconnection Basic Reference Model
+
+
+Завдяки такій структурі спільна робота мережевого обладнання й програмного забезпечення стає 
+простішою, прозорішою й зрозумілішою. 
+
+
+    Прикладний рівень (Application layer)
+    Рівень представлення (Presentation layer)
+    Сеансовий рівень (Session layer)
+    Транспортний рівень (Transport layer)
+    Мережевий рівень (Network layer)             ip адреса
+    Канальний рівень (Data Link layer)
+    Фізичний рівень (Physical layer)
+
+
+3-й рівень мережної моделі OSI, призначений для визначення шляху передачі даних.
+
+----------------------------
+
+
+
+
+
+
+
+       _____                                              ____
+      |     |--------------------------------------------|    |
+      |     |                                            |    |
+      |_____|                                            |____|
+
+
+
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+

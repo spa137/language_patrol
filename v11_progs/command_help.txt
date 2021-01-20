@@ -1,0 +1,10 @@
+# spa it
+# "Мовний патруль"
+[linux]
+запуск
+ansible-playbook имя_файла.yml
+
+
+пинг
+ansible all -m ping
+

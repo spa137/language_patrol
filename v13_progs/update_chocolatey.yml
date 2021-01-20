@@ -1,0 +1,7 @@
+- hosts: all
+  tasks:
+  - name: Update additional software
+    win_chocolatey:
+      name: all
+      state: latest
+    tags: choco

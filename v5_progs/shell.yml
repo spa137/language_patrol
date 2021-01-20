@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+  - name: Echo  date & hostname
+    shell: echo  "`uptime & hostname`" >> /home/$USER/Desktop/dates.txt
+    tags:
+      - uptime_hostname
+
+  - name: Echo  privet
+    shell: echo  "privet"  >> /home/$USER/Desktop/dates.txt
+    tags:
+      - privit

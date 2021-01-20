@@ -1,0 +1,8 @@
+# sudo ./install
+# install Ansible
+# проверьте установку ansible --version 
+sudo apt install sshpass -y
+apt update
+apt install software-properties-common
+apt-add-repository --yes --update ppa:ansible/ansible
+apt install ansible

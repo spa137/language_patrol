@@ -1,0 +1,6 @@
+[spa it мовний патруль]
+
+запуск
+ansible-playbook имя_файла.yml
+
+ansible-playbook -i инвентарный_файл playbook.yml

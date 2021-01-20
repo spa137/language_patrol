@@ -1,0 +1,18 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: Port knocking
+    routeros_command:
+      commands:
+        - / add action=add-src-to-address-list address-list=remote address-list-timeout=50m chain=input comment="icmp port knocking" in-interface=ether1 packet-size=144 protocol=icmp
+        - / add chain=input action=accept protocol=icmp
+        - / add chain=input action=accept protocol=tcp src-address-list=remote dst-port=22
+        - / add chain=input action=drop in-interface=ether1
+    register: ms_print
+  - name: debug print
+    debug: var=ms_print.stdout_lines
+# linux ping -c 1 -s 116 ip_adr
+# windows ping ip_adr -l 116 -n 1

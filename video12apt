@@ -1,0 +1,147 @@
+# SPA IT - мовний патруль
+# 
+[встановлення застосунків]
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми вивчаємо автоматизацію встановлення та видалення
+застосунків за допомогою apt (Advanced Packaging Tool)
+у Debian-подібних Linux системах.
+
+
+
+Клонуємо актуальні файли Мовного_Патруля та прямуємо до теки застосунків.
+mkdir teka_f && cd teka_f && git clone https://github.com/spa137/language_patrol 
+
+
+Файл встановлення застосунків [inst_pack_gui.yml] містить перелік пакетів apt 
+які будуть встановлені при виконанні плейбука. Це заміна команд apt install.
+[inst_pack_gui.yml]
+****************state: present*********заміна apt install ім'я_пакета
+
+---
+- hosts: linux
+  become: true
+  tasks:
+    - name: install packages
+      apt:
+        state: present
+        name:
+         - wireshark
+         - krdc
+         - chromium-browser
+         - virtualbox
+         - vagrant
+         - vlc
+         - simplescreenrecorder
+         - libreoffice
+         - remmina
+         - meld
+         - usb-creator-kde  
+
+
+Файл видалення застосунків [uninstall_gui.yml] містить перелік пакетів apt 
+які буде видалено  при виконанні плейбука. Заміна команд apt remove.
+
+[uninstall_gui.yml]
+****************state: absent*********заміна apt remove ім'я_пакета 
+---
+- hosts: linux
+  become: true
+  tasks:
+    - name: uninstall packages
+      apt:
+        state: absent
+        name:
+         - wireshark
+         - krdc
+         - chromium-browser
+         - virtualbox
+         - vagrant
+         - vlc
+         - simplescreenrecorder
+         - libreoffice
+         - remmina
+         - meld
+         - usb-creator-kde  
+
+Також у теці наведено кілька популярних плейбуків для apt.
+
+
+remove_dependencies_no_required.yml
+remove_useless_packages.yml
+update_cache_3600sec_yes.yml
+update.yml
+
+
+Встановимо та видалемо один з застосунків за допомогою плейбуків.
+
+ansible-playbook inst_gui_meld.yml
+ansible-playbook uninstall_gui_meld.yml
+
+
+
+
+
+
+
+ 
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+

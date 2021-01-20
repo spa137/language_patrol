@@ -1,0 +1,14 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: ip_up
+    routeros_command:
+      commands:
+        - /ip address add address=192.168.88.34/24 interface=ether1
+        - /ip address add address=10.0.0.1/24 interface=ether2        
+    register: adre_print
+  - name: debug print
+    debug: var=adre_print.stdout_lines

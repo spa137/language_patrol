@@ -1,0 +1,9 @@
+- hosts: all
+  connection: network_cli
+  tasks:
+  - name: resource print
+    routeros_command:
+      commands: /system resource print
+    register: system_print
+  - name: debug print
+    debug: var=system_print.stdout_lines

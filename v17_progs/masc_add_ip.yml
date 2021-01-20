@@ -1,0 +1,21 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: new CHR for labs
+    routeros_command:
+      commands:
+        - /interface list add name=WAN add name=LAN
+        - /interface wireless security-profiles set [ find default=yes ] supplicant-identity=MikroTik
+        - /ip pool add name=dhcp ranges=10.0.0.100-10.0.0.150
+        - /ip dhcp-server add address-pool=dhcp disabled=no interface=ether2 name=dhcp1
+        - /interface list member add interface=ether1 list=WAN add list=LAN
+        - /ip address add address=10.0.0.1/24 interface=ether2 network=10.0.0.0
+        - /ip dhcp-client add disabled=no interface=ether1
+        - /ip dhcp-server network add address=10.0.0.0/24 gateway=10.0.0.1 netmask=24
+        - /ip firewall nat add action=masquerade chain=srcnat out-interface-list=WAN
+    register: adre_print
+  - name: debug print
+    debug: var=adre_print.stdout_lines

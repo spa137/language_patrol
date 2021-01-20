@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install packages
+      apt:
+        state: present
+        name:
+         - wireshark
+         - htop

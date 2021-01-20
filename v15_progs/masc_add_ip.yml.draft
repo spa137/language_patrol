@@ -1,0 +1,19 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: new CHR for labs
+    routeros_command:
+      commands:
+# встановлюємо адреси
+        - /ip address add address=192.168.88.34/24 interface=ether1
+        - /ip address add address=10.0.0.1/24 interface=ether2
+# зносимо запис, якщо плейбук використано не перший раз
+        - /ip firewall nat remove 0
+# маскарадінг
+        - /ip firewall nat add chain=srcnat action=masquerade out-interface=ether1
+    register: adre_print
+  - name: debug print
+    debug: var=adre_print.stdout_lines

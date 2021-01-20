@@ -1,0 +1,6 @@
+[linux]
+192.168.88.252 ansible_connection=ssh ansible_user=s ansible_ssh_pass=0993676664 ansible_sudo_pass=0993676664 var1=linux_in_host
+
+
+[mikrotik]
+192.168.88.34  ansible_user=admin ansible_network_os=routeros ansible_ssh_pass=123 ansible_ssh_port=22 var1=mikrotik_in_host

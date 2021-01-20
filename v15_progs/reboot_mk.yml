@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: False
+  connection: network_cli
+  tasks:
+  - name: reboot device
+    routeros_command:
+      commands: ":execute {/system reboot};"

@@ -1,0 +1,14 @@
+---
+- hosts: linux
+  become: true
+  tasks:
+    - name: uninstall packages
+      apt:
+        state: absent
+        name:
+         - meld
+  
+
+
+
+

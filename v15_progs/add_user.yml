@@ -1,0 +1,11 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: add user
+    routeros_command:
+      commands:
+        - /user add name=spa group=full password=123
+

@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+  - name: Install a package that requires 'become'
+    win_chocolatey:
+      name: officepro2013
+    become: yes
+    become_user: sw
+    become_method: runas

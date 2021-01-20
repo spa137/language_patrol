@@ -1,0 +1,13 @@
+---
+- hosts: linux
+  tasks:
+  - name: Print var
+    ansible.builtin.debug:
+#      var: ansible_processor
+#      var: ansible_distribution
+       var: ansible_uptime_seconds
+  - name: Print var in file host
+    ansible.builtin.debug:
+      var: var1
+  
+

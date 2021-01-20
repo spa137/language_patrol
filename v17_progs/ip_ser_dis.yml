@@ -1,0 +1,17 @@
+---
+- hosts: all
+  connection: network_cli
+  tasks:
+  - hosts: all
+    connection: network_cli
+    tasks:
+    - name: "disable sensitive service 
+      routeros_command:
+        commands: /ip service disable {{ item }}
+      with_items:
+       - telnet
+       - ftp
+       - api
+       - api-ssl
+       - winbox
+      tags: [ "disable sensitive service" ]

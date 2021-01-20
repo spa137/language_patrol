@@ -1,0 +1,18 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: snmp
+    routeros_command:
+      commands:
+        - /snmp set enabled=yes
+        - /snmp set contact="spa <mspa16@gmail.com>"
+        - /snmp set location="home"
+        - /snmp community add name=spa authentication-protocol=SHA1 authentication-password=12345678 encryption-protocol=AES encryption-password=87654321
+        - /snmp community set 1 write-access=yes
+        
+    register: snmp_print
+  - name: debug print
+    debug: var=snmp_print.stdout_lines

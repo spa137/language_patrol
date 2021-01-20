@@ -1,0 +1,11 @@
+- name: Create bridge-interfaces
+  gather_facts: false
+  tasks:   
+    - name: Create bridge
+      routeros_command:
+        commands:
+          - /interface bridge add name=bridge1
+          - /interface bridge print
+      register: bridge_print
+    - name: debug print
+      debug: var=bridge_print.stdout_lines

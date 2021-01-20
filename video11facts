@@ -1,0 +1,134 @@
+# SPA IT - мовний патруль
+# 
+[збір фактів]
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми вивчаємо збір фактів Ansible.
+
+
+Клонуємо актуальні файли Мовного_Патруля та прямуємо до теки застосунків.
+mkdir teka_f && cd teka_f && git clone https://github.com/spa137/language_patrol 
+
+
+
+Наразі маємо ускладнений інвентарний файл host. 
+В ньому опис одного хоста лінукс на одного mikrotik.
+Збирати факти ми будемо тільки для лінукс-систем, 
+тому у застосунках, що наведено нижче, 
+вказано linux замість all для цілей.
+ 
+|  [linux]
+|  192.168.88.252 ansible_connection=ssh ansible_user=s ansible_ssh_pass=0993676664 ansible_sudo_pass=0993676664 var1=linux_in_host
+|
+|
+|  [mikrotik]
+|  192.168.88.34  ansible_user=admin ansible_network_os=routeros ansible_ssh_pass=123 ansible_ssh_port=22 var1=mikrotik_in_host
+
+Система збирає факти коли не задано -  gather_facts: False (не займатись збиранням фактів).
+
+
+Змінні, до яких заноситься інформація про зібрані факти,
+найпростійше дослідити за допомогою команди 
+з файлу facts_cli.sh 
+|  # збір фактів Лінукс
+|  ansible linux -m ansible.builtin.setup
+
+Меньш зручно -
+Файл facts_cli.yml (не будемо його запускати у цьому відео,
+але в теці Мовного_Патруля Ви його знайдете)
+|  ---
+|  - hosts: linux
+|    tasks:
+|    - name: Print all available facts
+|      ansible.builtin.debug:
+|        var: ansible_facts
+
+
+
+Роздрукуємо змінні 
+ansible_uptime_seconds - яку система отримала, збираючи факти
+та
+var1 - ми надали Ansble її у файлі host.
+
+
+ansible-playbook 1var_print_linux.yml
+
+
+Файл 1var_print_linux.yml 
+|  ---
+|  - hosts: linux
+|    tasks:
+|    - name: Print var
+|      ansible.builtin.debug:
+|  #      var: ansible_processor
+|  #      var: ansible_distribution
+|         var: ansible_uptime_seconds
+|    - name: Print var in file host
+|      ansible.builtin.debug:
+|         var: var1
+
+Ці змінні ми будемо використовувати при побудові плейбуків. Згодом.
+Залишайтесь з нами. Далі буде.
+
+
+
+
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+
