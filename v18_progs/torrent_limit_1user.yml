@@ -4,7 +4,7 @@
   connection: network_cli
   gather_facts: false
   tasks:  
-  - name: torrent linit 1 user
+  - name: torrent limit 1 user
     routeros_command:
       commands:
         - /ip firewall filter add chain=forward action=drop tcp-flags=syn protocol=tcp src-address=192.168.0.200 dst-port=!80,443,8080 connection-limit=40,32 
