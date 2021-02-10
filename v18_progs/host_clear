@@ -1,5 +1,5 @@
 [mikrotik]
-192.168.88.222 ansible_user=admin ansible_network_os=routeros ansible_ssh_port=22
+192.168.88.244 ansible_user=admin ansible_network_os=routeros ansible_ssh_port=22
 
 
 
