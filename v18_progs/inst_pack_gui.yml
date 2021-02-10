@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install packages
+      apt:
+        state: present
+        name:
+         - wireshark
+         - krdc
+#         - opera
+         - chromium-browser
+         - virtualbox
+         - vagrant
+         - vlc
+         - simplescreenrecorder
+         - libreoffice
+         - remmina
+#         - discord
+         - meld
+         - usb-creator-kde  
+
+
+
+

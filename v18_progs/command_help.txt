@@ -1,0 +1,24 @@
+[spa it базовый курс]
+
+
+[linux]
+запуск
+ansible-playbook имя_файла.yml
+
+
+пинг
+ansible all -m ping
+
+
+[роли]
+
+role_deb_update.yml обновление
+role_newhost_gui.yml обновление && установка софта
+
+
+
+
+[единичные файлы]
+
+inst_pack_gui.yml установить ПО (gui system)
+

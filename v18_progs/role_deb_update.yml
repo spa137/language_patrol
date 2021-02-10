@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - role_deb_update.yml
+    - install_gui
+
+
+

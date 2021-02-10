@@ -1,0 +1,4 @@
+[linux]
+192.168.88.222 ansible_connection=ssh ansible_user=s ansible_ssh_pass=0993676664 ansible_sudo_pass=0993676664
+
+

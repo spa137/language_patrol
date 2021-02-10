@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+  - name: Echo  date & hostname
+    shell: echo  "`date & hostname`" >> /home/$USER/dates.txt
+    tags:
+      - date_hostname
+
+  - name: Echo  privet
+    shell: echo  "privet"  >> /home/$USER/dates.txt
+    tags:
+      - hello
