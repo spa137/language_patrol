@@ -1,0 +1,13 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: torrent linit 1 user
+    routeros_command:
+      commands:
+        - /ip firewall address-list add list=torrent_limit address=192.0.34.166/32
+    register: adre_print
+  - name: debug print
+    debug: var=adre_print.stdout_lines
