@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+  - name: List user accounts on a Windows system
+    raw: Get-WmiObject -Class Win32_UserAccount
+    register: userss
+
+  - debug: msg="{{ userss.stdout }}"
+  - debug: msg=all
+  - debug: msg="{{ userss.stdout_lines }}"

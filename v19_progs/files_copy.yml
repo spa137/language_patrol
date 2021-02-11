@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+  - name: Copy  files hello
+    win_copy:
+      src: ./files/hello.txt
+      dest: C:\Users\%USERNAME%\Desktop\hello.txt
+  - name: Copy  files hello
+    win_copy:
+      src: ./files/ssh_on.ps1
+      dest: C:\Users\%USERNAME%\Desktop\ssh_on.ps1

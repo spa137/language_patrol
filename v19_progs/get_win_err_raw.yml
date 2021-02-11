@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+  - name: List System  error
+    raw: Get-EventLog -Logname 'System'
+    register: syserr
+
+  - debug: msg="{{ syserr.stdout }}"
+  - debug: msg=all
+  - debug: msg="{{ syserr.stdout_lines }}"
+
+
+# usage.stdout_lines
