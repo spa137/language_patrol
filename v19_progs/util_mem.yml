@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
   - name: get_disk
-    raw: Get-Disk | foreach { $_ | Get-StorageReliabilityCounter | Format-List }
+    raw: Get-Counter '\Memory\Available MBytes'
     register: get_disk
   - debug: msg="{{ get_disk.stdout_lines }}"
 

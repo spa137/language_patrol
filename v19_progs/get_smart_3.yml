@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
   - name: get_disk
-    raw: Get-Disk | foreach { $_ | Get-StorageReliabilityCounter | Format-List }
+    raw: Get-Disk | Get-StorageReliabilityCounter | Select-Object -Property "*"
     register: get_disk
   - debug: msg="{{ get_disk.stdout_lines }}"
 
