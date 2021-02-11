@@ -1,0 +1,138 @@
+# SPA IT - мовний патруль
+# 
+[збір статистичних даних віддалених ubuntu-подібних систем]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми продовжимо вивчати Linux та Ansible.
+
+
+Наразі простенька система збирання інформації
+про стан віддалених хостів Лінукс,
+що може буди легко поєднана з планувальником
+для виконання за роскладом.
+
+Файли відео містить тека v18_progs
+
+Вже знайому інструкцію grep використовуємо
+з регулярним виразом.
+Отримаємо рядки Reallocated_Sector_Ct та Temperature_Celsius
+
+Застосунок демонструє забагато інформації. 
+sudo smartctl -a /dev/sda 
+Тому грепуємо тільки два найцікавійші рядки.
+sudo smartctl -a /dev/sda | grep 'Reallocated_Sector_Ct\|Temperature_Celsius'
+
+
+
+
+
+ansible-playbook statistic.yml
+
+
+
+---
+- hosts: all
+  become: true
+  tasks:
+# Перевіряємо наявність smartmontools - він містить smartctl
+    - name: install smartctl
+      apt:
+        state: present
+        name:
+         - smartmontools
+# грепнемо найбільш інформативні рядки
+    - name: smart
+      shell: sudo smartctl -a /dev/sda | grep 'Reallocated_Sector_Ct\|Temperature_Celsius'
+      register: system_print
+# перевіримо стан пам'яті
+    - name: mem
+      shell: cat /proc/meminfo | grep 'SwapTotal:\|SwapFree:\|MemTotal:\|MemFree:'      
+      register: mem_print
+# також не завадить  load average
+    - name: uptime
+      shell: uptime
+      register: uptime_print
+      
+    - name: debug print
+      debug: var=system_print.stdout_lines
+    - name: debug print
+      debug: var=mem_print.stdout_lines
+    - name: debug print
+      debug: var=uptime_print.stdout_lines
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+
