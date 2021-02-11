@@ -62,6 +62,12 @@ ansible-playbook statistic.yml
       debug: var=uptime_print.stdout_lines
 
 
+Збирайте статистику.
+Зберігайте спокій.
+Тримайте порох сухом.
+
+Це мовний патруль та айті українською.
+
 
 
 
