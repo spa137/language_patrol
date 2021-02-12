@@ -1,0 +1,15 @@
+- hosts: all
+  tasks:
+  - name: get_status
+    raw: wmic diskdrive get status
+    register: get_status
+  - name: get_disk
+    raw: Get-Counter '\Memory\Available MBytes'
+    register: get_disk
+  - name: get_cpu
+    raw: Get-Counter '\Processor(_Total)\% Processor Time'
+    register: get_cpu  
+  - debug: msg="{{ get_status.stdout_lines }}"     
+  - debug: msg="{{ get_disk.stdout_lines }}"
+  - debug: msg="{{ get_cpu.stdout_lines }}"
+

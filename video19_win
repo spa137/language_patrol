@@ -1,6 +1,6 @@
 # SPA IT - мовний патруль
 # 
-[збір статистичних даних віддалених ubuntu-подібних систем]
+[збір статистичних даних віддалених Windows систем]
 
                                
 Привіт! Це мовний патруль та айті українською.
@@ -12,62 +12,25 @@
 що може буди легко поєднана з планувальником
 для виконання за розкладом.
 
-Файли відео містить тека v18_progs
-
-Вже знайому інструкцію grep використовуємо
-з регулярним виразом.
-Отримаємо рядки Reallocated_Sector_Ct та Temperature_Celsius
-
-Застосунок демонструє забагато інформації. 
-sudo smartctl -a /dev/sda 
-Тому грепуємо тільки два найцікавійші рядки.
-sudo smartctl -a /dev/sda | grep 'Reallocated_Sector_Ct\|Temperature_Celsius'
+Файли відео містить тека v19_progs
 
 
+ansible-playbook  disc_mem_cpu_inquiry.yml  | grep '"'
 
-
-
-ansible-playbook statistic.yml
-
-
-
----
 - hosts: all
-  become: true
   tasks:
-# Перевіряємо наявність smartmontools - він містить smartctl
-    - name: install smartctl
-      apt:
-        state: present
-        name:
-         - smartmontools
-# грепнемо найбільш інформативні рядки
-    - name: smart
-      shell: sudo smartctl -a /dev/sda | grep 'Reallocated_Sector_Ct\|Temperature_Celsius'
-      register: system_print
-# перевіримо стан пам'яті
-    - name: mem
-      shell: cat /proc/meminfo | grep 'SwapTotal:\|SwapFree:\|MemTotal:\|MemFree:'      
-      register: mem_print
-# також не завадить  load average
-    - name: uptime
-      shell: uptime
-      register: uptime_print
-      
-    - name: debug print
-      debug: var=system_print.stdout_lines
-    - name: debug print
-      debug: var=mem_print.stdout_lines
-    - name: debug print
-      debug: var=uptime_print.stdout_lines
-
-
-Збирайте статистику.
-Зберігайте спокій.
-Тримайте порох сухом.
-
-Це мовний патруль та айті українською.
-
+  - name: get_status
+    raw: wmic diskdrive get status
+    register: get_status
+  - name: get_disk
+    raw: Get-Counter '\Memory\Available MBytes'
+    register: get_disk
+  - name: get_cpu
+    raw: Get-Counter '\Processor(_Total)\% Processor Time'
+    register: get_cpu  
+  - debug: msg="{{ get_status.stdout_lines }}"     
+  - debug: msg="{{ get_disk.stdout_lines }}"
+  - debug: msg="{{ get_cpu.stdout_lines }}"
 
 
 
