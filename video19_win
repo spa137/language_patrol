@@ -12,24 +12,28 @@
 що може буди легко поєднана з планувальником
 для виконання за розкладом.
 
-Файли відео містить тека v19_progs
-
+Файли відео містить тека v19_progs Мовного_Патруля
+https://github.com/spa137/base_ansible
 
 ansible-playbook  disc_mem_cpu_inquiry.yml  | grep '"'
 
 - hosts: all
   tasks:
+# OK - диск у нормальному стані, може далі використовуватись
   - name: get_status
     raw: wmic diskdrive get status
     register: get_status
-  - name: get_disk
+# інформація про доступну пам'ять
+  - name: get_mem
     raw: Get-Counter '\Memory\Available MBytes'
-    register: get_disk
+    register: get_mem
+# завантаженість процесора
   - name: get_cpu
     raw: Get-Counter '\Processor(_Total)\% Processor Time'
     register: get_cpu  
+# друк змінних
   - debug: msg="{{ get_status.stdout_lines }}"     
-  - debug: msg="{{ get_disk.stdout_lines }}"
+  - debug: msg="{{ get_mem.stdout_lines }}"
   - debug: msg="{{ get_cpu.stdout_lines }}"
 
 

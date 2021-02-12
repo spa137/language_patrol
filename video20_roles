@@ -1,0 +1,171 @@
+# SPA IT - мовний патруль
+# 
+[ролі в Ansible]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми продовжимо вивчати Ansible
+та досліджуємо ролі.
+
+
+
+Файли з відео містить тека v20_progs Мовного_Патруля
+https://github.com/spa137/base_ansible
+
+
+файл ansible.cfg
+додамо шлях до теки ролей
+
+# additional paths to search for roles in, colon separated
+roles_path    = ./roles 
+
+
+плейбук
+ansible-playbook  inst_pack_gui.yml
+
+Містить перелік тек (з теки ролей), код з яких буде виконано.
+
+---
+- hosts: all
+  roles:
+# Debian-подібна система, оновлення
+    - deb_update
+# Встановлення застосунків
+    - install_gui
+
+
+Типова тека ролей обов'язково містить теку 
+tasks з файлом завдань main.yml
+Та може містити додаткові теки
+(наприклад, теку обробчиків та теку змінних)
+
+
+плейбук inst_pack_gui.yml
+виконає:
+
+1 файл завдань з оновлення
+/roles/deb_update/tasks/main.yml 
+
+    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      become: true
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: Upgrade all packages on servers
+      become: true
+      apt: upgrade=dist force_apt_get=yes
+
+    - name: Check if a reboot is needed on all servers
+      become: true
+      register: reboot_required_file
+      stat: path=/var/run/reboot-required get_md5=no
+
+    - name: Reboot the box if kernel updated
+      become: true
+      reboot:
+        msg: "Reboot initiated by Ansible for kernel updates"
+        connect_timeout: 5
+        reboot_timeout: 300
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+      when: reboot_required_file.stat.exists
+
+2 файл встановлення застосунків
+/roles/install_gui/tasks/main.yml
+
+
+    - name: install soft
+      become: true
+      apt:
+        state: present
+          name:
+           - vagrant
+           - wireshark
+           - krdc
+           - chromium-browser
+           - virtualbox
+           - vlc
+           - simplescreenrecorder
+           - libreoffice
+           - remmina
+           - meld
+           - usb-creator-kde
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+

@@ -1,0 +1,6 @@
+  - name: info
+    shell: echo  "`date & hostname`" > /home/$USER/Desktop/info.txt
+  - name: info2
+    shell: echo  "Привіт, Сергій!" >> /home/$USER/Desktop/info.txt
+
+

@@ -1,0 +1,7 @@
+---
+- hosts: all
+  roles:
+# Debian-подібна система, оновлення
+    - deb_update
+# Встановлення застосунків
+    - install_gui

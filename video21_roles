@@ -1,0 +1,119 @@
+# SPA IT - мовний патруль
+# 
+[ролі в Ansible, продовження]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми продовжимо досліджувати ролі.
+Використаємо зібрані факти в умовному виразі 
+для прийняття рішення на виконання ролі.
+
+
+
+Файли з відео містить тека v21_progs Мовного_Патруля
+https://github.com/spa137/base_ansible
+
+
+
+плейбук
+ansible-playbook  inst_pack_gui2.yml
+
+Містить перелік тек (з теки ролей), код з яких буде виконано.
+Але одна з ролей стартує при виконанні умови 
+
+---
+- hosts: all
+  roles:
+      - role: hello_print            
+        when: ansible_facts['user_id'] == 's'
+      - role: deb_update 
+
+
+hello_print виконується за умови, що ansible_facts['user_id']
+дорівнює  's'
+deb_update буде виконано за будь-яких умов
+Ця роль друкує на стільниці файл привітання та дату з ім'ям хоста
+
+/v21_progs/roles/hello_print/main.yml
+
+  - name: info
+    shell: echo  "`date & hostname`" > /home/$USER/Desktop/info.txt
+  - name: info2
+    shell: echo  "Привіт, Сергій!" >> /home/$USER/Desktop/info.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+
