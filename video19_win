@@ -13,7 +13,7 @@
 для виконання за розкладом.
 
 Файли відео містить тека v19_progs Мовного_Патруля
-https://github.com/spa137/base_ansible
+https://github.com/spa137/language_patrol
 
 ansible-playbook  disc_mem_cpu_inquiry.yml  | grep '"'
 
