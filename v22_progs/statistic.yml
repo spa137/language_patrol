@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: install smartctl
+      apt:
+        state: present
+        name:
+         - smartmontools
+    - name: smart
+      shell: sudo smartctl -a /dev/sda | grep 'Reallocated_Sector_Ct\|Temperature_Celsius'
+      register: system_print
+    - name: mem
+      shell: cat /proc/meminfo | grep 'SwapTotal:\|SwapFree:\|MemTotal:\|MemFree:'      
+      register: mem_print
+    - name: uptime
+      shell: uptime
+      register: uptime_print
+      
+    - name: debug print
+      debug: var=system_print.stdout_lines
+    - name: debug print
+      debug: var=mem_print.stdout_lines
+    - name: debug print
+      debug: var=uptime_print.stdout_lines
