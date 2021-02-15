@@ -1,6 +1,6 @@
 # SPA IT - мовний патруль
 # 
-[ролі в Ansible, продовження]
+[обробники в Ansible]
 
                                
 Привіт! Це мовний патруль та айті українською.
@@ -16,8 +16,7 @@ https://github.com/spa137/language_patrol
 ansible-playbook  role_newhost_gui2.yml
 
 
-Містить перелік тек (з теки ролей), код з яких буде виконано.
-Але одна з ролей стартує при виконанні умови 
+Містить перелік тек (з теки ролей), код з яких буде виконано. 
 
 ---
 - hosts: all
@@ -26,11 +25,12 @@ ansible-playbook  role_newhost_gui2.yml
         when: ansible_facts['user_id'] == 's'
       - role: deb_update 
 
+одна з них-
 deb_update
 Ця роль друкує на стільниці файл привітання та дату з ім'ям хоста
 
 
-/v22_progs/roles/hello_print/tasks/main.yml
+/v22_progs/roles/deb_update/tasks/main.yml
 
     - name: Reboot the box if kernel updated
       become: true
@@ -46,14 +46,28 @@ deb_update
 
 #      when: reboot_required_file.stat.exists
       when: 1
+На на відміну від відео 21, умова when: 1 виконується 
+завжди - це зроблено тимчасово, для тестування.
+
+      notify:
+        - reebot_1
+повідомлення - reebot_1 вказує, що після виконання /tasks/main.yml
+з ролі, виконати 
+з теки обробників  /handlers/main.yml код ім'ям  - name: reebot_1
+ 
 
 
-/v22_progs/roles/deb_update/handlers
+
+/v22_progs/roles/deb_update/handlers/main.yml
 
   - name: reebot_1
     shell: echo  "Систему перезавантажено. Ваш Ansible" >> /home/$USER/Desktop/info.txt
 
-
+Результат виконання ролі deb_update -
+повідомлення, що систему було перезаванажено за ініціативою 
+Ansible
+Це зроблено після перезапуску Лінукс
+за допомогою обробника.
 
 
 
