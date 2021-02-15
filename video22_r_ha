@@ -26,23 +26,12 @@ ansible-playbook  role_newhost_gui2.yml
         when: ansible_facts['user_id'] == 's'
       - role: deb_update 
 
-
-hello_print виконується за умови, що ansible_facts['user_id']
-дорівнює  's'
-deb_update буде виконано за будь-яких умов
+deb_update
 Ця роль друкує на стільниці файл привітання та дату з ім'ям хоста
 
-/v21_progs/roles/hello_print/tasks/main.yml
 
-  - name: info
-    shell: echo  "`date & hostname`" > /home/$USER/Desktop/info.txt
-  - name: info2
-    shell: echo  "Привіт, Сергій!" >> /home/$USER/Desktop/info.txt
+/v22_progs/roles/hello_print/tasks/main.yml
 
-Доречі,
-у ролі оновлення системи теж є умова-
-/v21_progs/roles/hello_print/tasks/main.yml
-...
     - name: Reboot the box if kernel updated
       become: true
       reboot:
@@ -52,13 +41,17 @@ deb_update буде виконано за будь-яких умов
         pre_reboot_delay: 0
         post_reboot_delay: 30
         test_command: uptime
-      when: reboot_required_file.stat.exists
-якщо існує 
-(/var/run/reboot-required існує - про це
-повідомляє змінна reboot_required_file)
+      notify:
+        - reebot_1
+
+#      when: reboot_required_file.stat.exists
+      when: 1
 
 
+/v22_progs/roles/deb_update/handlers
 
+  - name: reebot_1
+    shell: echo  "Систему перезавантажено. Ваш Ansible" >> /home/$USER/Desktop/info.txt
 
 
 
