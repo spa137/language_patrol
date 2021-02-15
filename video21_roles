@@ -14,9 +14,9 @@
 https://github.com/spa137/base_ansible
 
 
-
 плейбук
-ansible-playbook  inst_pack_gui2.yml
+ansible-playbook  role_newhost_gui2.yml
+
 
 Містить перелік тек (з теки ролей), код з яких буде виконано.
 Але одна з ролей стартує при виконанні умови 
@@ -34,14 +34,30 @@ hello_print виконується за умови, що ansible_facts['user_id'
 deb_update буде виконано за будь-яких умов
 Ця роль друкує на стільниці файл привітання та дату з ім'ям хоста
 
-/v21_progs/roles/hello_print/main.yml
+/v21_progs/roles/hello_print/tasks/main.yml
 
   - name: info
     shell: echo  "`date & hostname`" > /home/$USER/Desktop/info.txt
   - name: info2
     shell: echo  "Привіт, Сергій!" >> /home/$USER/Desktop/info.txt
 
-
+Доречі,
+у ролі оновлення системи теж є умова-
+/v21_progs/roles/hello_print/tasks/main.yml
+...
+    - name: Reboot the box if kernel updated
+      become: true
+      reboot:
+        msg: "Reboot initiated by Ansible for kernel updates"
+        connect_timeout: 5
+        reboot_timeout: 300
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+      when: reboot_required_file.stat.exists
+якщо існує 
+(/var/run/reboot-required існує - про це
+повідомляє змінна reboot_required_file)
 
 
 
