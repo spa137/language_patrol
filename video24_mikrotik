@@ -1,0 +1,103 @@
+# SPA IT - мовний патруль
+# 
+[Ansible та MikroTik]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні ми продовжимо вивчати MikroTik та Ansible.
+
+ 
+файли з відео у теці v24_progs мовного патруля
+https://github.com/spa137/language_patrol
+ 
+ 
+
+
+Актуальні налаштування пристрою-
+
+логін spa
+пароль 123
+
+IP адреса 192.168.88.34
+
+
+
+ansible-playbook  2project_ut.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+наступне відео працюємо з пристроєм за статичною адресою
+та за встановленим логіном та паролем
+
+
+ 
+
+[git commands]
+
+git clone отримати локально з GitHub
+
+
+git log
+git log --oneline --abbrev-commit --all --graph
+git checkout 
+
+git commit -a -m "fixed !"
+git add .
+
+git pull
+
+
+
+
+
+
+
+
+
+
+[linux commands]
+
+
+hostname ім'я хоста
+
+
+
+ssh ім'я користувача@ip_хоста
+exit
+ 
+sudo apt update  отримати інформацію про оновлення
+sudo apt upgrade   встановити оновлення
+
+pwd де я
+tree -L 2 показати дерево на глибину 2
+whoami хто я
+touch створення файла
+cp копія
+mv перейменування/переміщення
+rm видалити
+
+mkdir створення каталога
+rmdir видалення каталога
+
+навігація
+cd .. каталог рівнем вище
+cd    ім'я_каталога
+cd ~  домашній каталог
+cd -  повернення  
+
+nano редагувати
+cat продивитись
+
+
+
