@@ -21,7 +21,7 @@
         - /ip service disable api-ssl
         - /ip service disable winbox
 # Продублюємо ssh порт
-
+        - /ip firewall nat add action=dst-nat chain=dstnat comment="222-22" dst-port=222 in-interface=ether1 protocol=tcp to-addresses=192.168.88.34 to-ports=22
 
 
 
