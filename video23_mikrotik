@@ -25,6 +25,32 @@ winbox, консолі
 - DHCP, пароль та логін за замовчуванням
 - статичний IP, новий пароль та логін
 
+
+ansible-playbook -i host_clear 1project_ut.yml
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: початок
+    routeros_command:
+      commands:
+# Встановлюэмо адреси
+        - /ip address add address=192.168.88.34/24 interface=ether1
+        - /ip address add address=10.0.0.1/24 interface=ether2 
+        - /ip address add address=10.0.0.2/24 interface=ether3
+        - /ip address add address=10.0.0.3/24 interface=ether4
+# Додати іншого юзера
+        - /user add name=spa group=full password=123
+# Відключення зайвих демонів
+        - /ip service disable telnet
+        - /ip service disable ftp
+        - /ip service disable api
+        - /ip service disable api-ssl
+        - /ip service disable winbox
+# Продублюємо ssh порт
+        - /ip firewall nat add action=dst-nat chain=dstnat comment="222-22" dst-port=222 in-interface=ether1 protocol=tcp to-addresses=192.168.88.34 to-ports=22
  
  
 
