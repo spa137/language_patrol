@@ -4,7 +4,7 @@
   connection: network_cli
   gather_facts: false
   tasks:  
-  - name: ip_up
+  - name: початок
     routeros_command:
       commands:
 # Встановлюэмо адреси
@@ -15,10 +15,13 @@
 # Додати іншого юзера
         - /user add name=spa group=full password=123
 # Відключення зайвих демонів
-
-        
-        
+        - /ip service disable telnet
+        - /ip service disable ftp
+        - /ip service disable api
+        - /ip service disable api-ssl
+        - /ip service disable winbox
 # Продублюємо ssh порт
+
 
 
 
