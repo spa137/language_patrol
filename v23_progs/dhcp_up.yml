@@ -1,0 +1,18 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: dhcp
+    routeros_command:
+      commands:
+
+        - /ip pool add name=dhcp ranges=10.0.0.100-10.0.0.150
+        - /ip dhcp-server add address-pool=dhcp disabled=no interface=ether2 name=dhcp1
+        - /ip dhcp-server network add address=10.0.0.0/24 gateway=10.0.0.1 netmask=24
+        - /ip route add distance=1 gateway=192.168.88.1
+
+    register: adre_print
+  - name: debug print
+    debug: var=adre_print.stdout_lines
