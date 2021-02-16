@@ -1,0 +1,19 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: початок
+    routeros_command:
+      commands:
+# Вимикаємо адмін 
+        - /user disable admin
+
+
+
+
+
+
+
+  

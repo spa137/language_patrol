@@ -1,0 +1,16 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: DoH
+    routeros_command:
+      commands:
+        - /tool fetch url=https://cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
+        - /certificate import file-name=DigiCertGlobalRootCA.crt.pem passphrase=""
+        - /ip dns set use-doh-server=https://1.1.1.1/dns-query verify-doh-cert=yes
+        
+    register: info_print
+  - name: debug print
+    debug: var=info_print.stdout_lines

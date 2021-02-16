@@ -1,11 +1,15 @@
 # SPA IT - мовний патруль
 # 
-[обробники в Ansible]
+[Ansible та MikroTik]
 
                                
 Привіт! Це мовний патруль та айті українською.
 Сьогодні ми продовжимо вивчати MikroTik та Ansible.
-та трохи наблизимось до бойових умов використання.
+Трохи наблизимось до бойових умов використання.
+ 
+файли з відео у теці v23_progs мовного патруля
+https://github.com/spa137/language_patrol
+ 
  
 Умови використання скриптів-
 пристристрій за безпековим периметром
@@ -52,6 +56,14 @@ ansible-playbook -i host_clear 1project_ut.yml
 # Продублюємо ssh порт
         - /ip firewall nat add action=dst-nat chain=dstnat comment="222-22" dst-port=222 in-interface=ether1 protocol=tcp to-addresses=192.168.88.34 to-ports=22
  
+ 
+
+ssh -p 222 spa@192.168.88.34
+
+наступне відео працюємо з пристроєм за статичною адресою
+та за встановленим логіном та паролем
+
+
  
 
 [git commands]
