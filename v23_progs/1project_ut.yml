@@ -12,6 +12,8 @@
         - /ip address add address=10.0.0.1/24 interface=ether2 
         - /ip address add address=10.0.0.2/24 interface=ether3
         - /ip address add address=10.0.0.3/24 interface=ether4
+# Додати іншого юзера
+        - /user add name=spa group=full password=123
 # Відключення зайвих демонів
 
         
@@ -19,7 +21,7 @@
 # Продублюємо ssh порт
 
 
-# Встановимо нового користувача, відключемо admin
+
 
 
 
