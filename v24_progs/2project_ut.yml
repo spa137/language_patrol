@@ -9,11 +9,7 @@
       commands:
 # Вимикаємо адмін 
         - /user disable admin
-
-
-
-
-
-
-
-  
+# Робимо маскарадінг
+        - /ip firewall nat add chain=srcnat action=masquerade out-interface=ether1
+  - name: debug print
+    debug: var=adre_print.stdout_lines
