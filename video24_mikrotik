@@ -5,7 +5,9 @@
                                
 Привіт! Це мовний патруль та айті українською.
 Сьогодні ми продовжимо вивчати MikroTik та Ansible.
-
+Наразі дуже спрощене типове завдання-
+роутер з 1 WAN
+та 3 LAN
  
 файли з відео у теці v24_progs мовного патруля
 https://github.com/spa137/language_patrol
@@ -17,14 +19,63 @@ https://github.com/spa137/language_patrol
 
 логін spa
 пароль 123
-
 IP адреса 192.168.88.34
+Встановили у відео 23
+
+
+host
+
+[mikrotik]
+192.168.88.34 ansible_host=192.168.88.34 ansible_user=spa ansible_network_os=routeros ansible_ssh_pass=123 ansible_ssh_port=222
+
+
+
+
 
 
 
 ansible-playbook  2project_ut.yml
 
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: продовжуємо
+    routeros_command:
+      commands:
+# Вимикаємо адмін 
+        - /user disable admin
+# Відкриваємо порти 222 та 80 (80 для лабораторних виключно)
+        - /ip firewall filter add chain=input protocol=tcp dst-port=222 action=accept in-interface=ether1
+        - /ip firewall filter add chain=input protocol=tcp dst-port=80 action=accept in-interface=ether1
+# Робимо маскарадінг
+        - /ip firewall nat add chain=srcnat action=masquerade out-interface=ether1
 
+
+ansible-playbook  3project_ut.yml
+
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: файрвол
+    routeros_command:
+      commands:
+# Налаштуванная файрвол nat
+        - /ip firewall filter add action=accept chain=input connection-state=established,related,untracked
+        - /ip firewall filter add action=drop chain=input connection-state=invalid
+        - /ip firewall filter add action=accept chain=input protocol=icmp
+        - /ip firewall filter add action=drop chain=input in-interface=ether1
+        - /ip firewall filter add action=accept chain=forward  connection-state=established,related,untracked
+        - /ip firewall filter add action=drop chain=forward connection-state=invalid
+        - /ip firewall filter add action=drop chain=forward connection-nat-state=!dstnat connection-state=new in-interface=ether1
+# Годинник
+        - /system clock set time-zone-name=Europe/Kiev
+  - name: debug print
+    debug: var=adre_print.stdout_lines
 
 
 
