@@ -1,0 +1,21 @@
+
+---
+- hosts: all
+  connection: network_cli
+  gather_facts: false
+  tasks:  
+  - name: файрвол
+    routeros_command:
+      commands:
+# Налаштуванная файрвол nat
+        - /ip firewall filter add action=accept chain=input connection-state=established,related,untracked
+        - /ip firewall filter add action=drop chain=input connection-state=invalid
+        - /ip firewall filter add action=accept chain=input protocol=icmp
+        - /ip firewall filter add action=drop chain=input in-interface=ether1
+        - /ip firewall filter add action=accept chain=forward  connection-state=established,related,untracked
+        - /ip firewall filter add action=drop chain=forward connection-state=invalid
+        - /ip firewall filter add action=drop chain=forward connection-nat-state=!dstnat connection-state=new in-interface=ether1
+# Годинник
+        - /system clock set time-zone-name=Europe/Kiev
+  - name: debug print
+    debug: var=adre_print.stdout_lines
