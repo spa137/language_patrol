@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+      - role: hello_print            
+        when: ansible_facts['user_id'] == 's'
+      - role: deb_update 
