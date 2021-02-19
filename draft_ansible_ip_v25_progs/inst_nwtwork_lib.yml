@@ -1,0 +1,11 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+
+  - name: Install needed network manager libs
+    ansible.builtin.package:
+      name:
+        - libsemanage-python
+        - policycoreutils-python
+      state: present
