@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Copy file 
+    ansible.builtin.copy:
+      src: ./files/conf_net.yaml
+      dest: /etc/netplan
+      owner: s
+      group: s
+      mode: '0644'
