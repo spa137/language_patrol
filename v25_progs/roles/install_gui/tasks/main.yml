@@ -1,0 +1,20 @@
+
+    - name: install soft
+      become: true
+      apt: 
+        state: present
+          name:
+           - vagrant
+           - wireshark
+           - krdc
+           - chromium-browser
+           - virtualbox
+           - vlc
+           - simplescreenrecorder
+           - libreoffice
+           - remmina
+           - meld
+           - usb-creator-kde  
+
+
+

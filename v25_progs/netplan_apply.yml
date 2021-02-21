@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: netplan apply
+    shell: netplan apply
+
+

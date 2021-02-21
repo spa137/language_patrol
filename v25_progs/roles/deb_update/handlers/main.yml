@@ -1,0 +1,4 @@
+  - name: reebot_1
+    shell: echo  "Систему перезавантажено. Ваш Ansible" >> /home/$USER/Desktop/info.txt
+
+
