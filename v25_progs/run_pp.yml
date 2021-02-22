@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Run a manifest with debug, log to both syslog and stdout, specify module path
+      community.general.puppet:
+        modulepath: /etc/puppet/modules:/opt/stack/puppet-modules:/usr/share/  openstack-puppet/modules
+        logdest: all
+        manifest: /var/lib/example/puppet_step_config.pp
