@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Mount an NFS volume
+      ansible.posix.mount:
+        src: 192.168.88.20:/nfs/ssd/shared_data
+        path: /mnt/shared_data
+        opts: rw,sync,hard,intr
+        state: mounted
+        fstype: nfs
+

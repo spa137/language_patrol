@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Unmount a mounted volume
+      ansible.posix.mount:
+        path: /tmp/mnt-pnt
+        state: unmounted
+

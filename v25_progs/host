@@ -1,4 +1,4 @@
 [linux]
-192.168.88.245 ansible_connection=ssh ansible_user=s ansible_ssh_pass=0993676664 ansible_sudo_pass=0993676664
+192.168.88.247 ansible_connection=ssh ansible_user=s ansible_ssh_pass=0993676664 ansible_sudo_pass=0993676664
 
 

@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   tasks:
-  - name: netplan apply
+  - name: sudo netplan apply
     shell: netplan apply
 
 
