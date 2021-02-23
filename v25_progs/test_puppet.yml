@@ -4,3 +4,5 @@
   tasks:
     - name: Run puppet agent and fail if anything goes wrong
       community.general.puppet:
+        timeout: 5m 
+
