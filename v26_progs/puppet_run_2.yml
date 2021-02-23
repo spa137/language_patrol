@@ -1,0 +1,9 @@
+---
+- hosts: all
+#  become: true
+  tasks:
+    - name: Run puppet agent and fail if anything goes wrong
+      community.general.puppet:
+#        modulepath: /etc/puppet/modules:/opt/stack/puppet-modules:/usr/share/openstack-puppet/modules
+#        logdest: all
+        manifest: /home/s/manif2.pp

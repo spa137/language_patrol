@@ -1,0 +1,73 @@
+# SPA IT - мовний патруль
+# 
+[puppet Ansible]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні продовжимо працювати з puppet.
+https://www.google.com/search?channel=fs&client=ubuntu&q=+community.general.puppet%3A
+(не забувайте встановити  ansible-galaxy collection install community.general)
+
+
+
+Наразі маємо стенд з відео 25
+Але застосуємо маніфести за допомогою Ansible.
+Файли знайдете у теці v26_progs Мовного_патруля
+
+
+Перший маніфест створює файл.
+ansible-playbook puppet_run_1.yml
+---
+- hosts: all
+  tasks:
+    - name: Run puppet agent and fail if anything goes wrong
+      community.general.puppet:
+        manifest: /home/s/manif1.pp
+        
+Переконаємось cat /var/tmp/testfile
+
+
+Другий маніфест - видаляє
+
+
+ansible-playbook puppet_run_2.yml
+
+---
+- hosts: all
+  tasks:
+    - name: Run puppet agent and fail if anything goes wrong
+      community.general.puppet:
+        manifest: /home/s/manif2.pp
+        
+Переконаємось cat /var/tmp/testfile
+
+
+
+
+
+
+ll /var/tmp/ | grep testfile
+
+puppet apply manif1.pp
+
+file { "/var/tmp/testfile":
+        ensure => "present",
+        owner => "s",
+        group => "s",
+        mode => "664",
+        content => "This is a test file.
+                    Puppet",
+}
+
+ll | grep testfile
+
+puppet apply manif2.pp
+
+file { "/var/tmp/testfile":
+        ensure => "absent",
+
+}
+
+ll /var/tmp/ | grep testfile
+
+cat /var/tmp/testfile 
