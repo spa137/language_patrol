@@ -6,5 +6,35 @@
 Привіт! Це мовний патруль та айті українською.
 Сьогодні ми вперше зустрінемось з puppet.
 Найпростійший приклад застосування.
-На цілі встанолено ляльковий агент.
-Та існують файли маніфестів (*.pp).
+На цілі встанвлено ляльковий агент
+та існують файли маніфестів (*.pp).
+Маніфест описує бажаний стан системи.
+Після знайомства з Ansible, на мою думку,
+немає сенсу докладно пояснювати зміст маніфестів.
+Застосуємо їх послідовно
+
+ll /var/tmp/ | grep testfile
+
+puppet apply manif1.pp
+
+file { "/var/tmp/testfile":
+        ensure => "present",
+        owner => "s",
+        group => "s",
+        mode => "664",
+        content => "This is a test file.
+                    Puppet",
+}
+
+ll | grep testfile
+
+puppet apply manif2.pp
+
+file { "/var/tmp/testfile":
+        ensure => "absent",
+
+}
+
+ll /var/tmp/ | grep testfile
+
+cat /var/tmp/testfile 
