@@ -1,0 +1,31 @@
+# SPA IT - мовний патруль
+# 
+[Ansible]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+Сьогодні станемо трохи ближчими
+до бойових умов застосування Ansible.
+
+В минулих відео ми зберігали пароль у відкритому вигляді.
+Ще геть неприпустимо.
+
+
+Наразі створемо файл інвентарний з шифруванням.
+Вкажемо системі використовувати nano.
+
+export EDITOR=nano
+
+ansible-vault create host
+
+[linux]
+192.168.88.30 ansible_connection=ssh ansible_user=s ansible_ssh_pass=0993676664 ansible_sudo_pass=0993676664
+
+cat host
+
+ansible all -m ping --ask-vault-pass
+
+Плейбуки теж необхідно тепер запускати
+з --ask-vault-pass
+
+

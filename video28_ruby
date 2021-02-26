@@ -1,0 +1,42 @@
+# SPA IT - мовний патруль
+# 
+[ruby]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+Для подальшого навчання нам знадобляться базові
+знання мови програмування ruby.
+Без цого неможливо розібратись, наприклад,
+у Vagrant на Chef.
+
+
+
+s@s-pc:~$ ruby -version
+ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-gnu]
+Traceback (most recent call last):
+-e:1:in `<main>': undefined local variable or method `rsion' for main:Object (NameError)
+
+nano helloword.rb
+puts "Hello, World!"
+
+ruby helloword.rb
+
+
+Для звичного виконання застосунку на ruby
+знайдемо інтерпретатор та вкажемо його 
+місцезнаходження у першому рядку скрипта.
+
+s@s-pc:~$ which ruby
+/usr/bin/ruby
+
+nano helloword.rb
+#!/usr/bin/ruby
+puts "Hello, World!"
+
+
+chmod +x helloword.rb
+./helloword.rb
+
+
+
+
