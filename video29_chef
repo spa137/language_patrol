@@ -10,7 +10,7 @@
 # https://docs.chef.io/chef_install_script/
 curl -L https://omnitruck.chef.io/install.sh | sudo bash
 
-Також створено 2 файли.
+Також існує 2 файли.
 Для створення та видалення  file1.txt.
 
 Для запуску їх використовуємо chef-apply.
@@ -38,4 +38,4 @@ end
 ll
 cat  file1.txt
 
-запук ещё раз – не изменится
+
