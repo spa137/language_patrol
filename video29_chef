@@ -1,0 +1,41 @@
+# SPA IT - мовний патруль
+# 
+[chef-apply]
+
+                               
+Привіт! Це мовний патруль та айті українською.
+На цілі встановлено ШЕФ за допомогою 
+інструкції з офіційного сайта.
+
+# https://docs.chef.io/chef_install_script/
+curl -L https://omnitruck.chef.io/install.sh | sudo bash
+
+Також створено 2 файли.
+Для створення та видалення  file1.txt.
+
+Для запуску їх використовуємо chef-apply.
+
+chef-apply file_create.rb
+
+
+
+file_create.rb
+
+file 'file1.txt' do
+  content 'hello world'
+end
+
+
+
+file_delete.rb
+
+file 'file1.txt' do
+  action :delete
+end
+
+
+
+ll
+cat  file1.txt
+
+запук ещё раз – не изменится
