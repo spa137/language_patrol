@@ -1,0 +1,32 @@
+# SPA IT - мовний патруль
+# 
+[chef apt_package]
+https://docs.chef.io/resources/apt_package/
+https://docs.chef.io/resources/service/
+Привіт! Це мовний патруль та айті українською.
+
+
+
+
+chef-apply install_packet.rb
+
+package %w(ngnix htop) do
+  action :install
+end
+# :install
+# :remove
+# :purge
+# :upgrade
+
+
+
+
+chef-apply ser_up.rb
+
+service 'ngnix' do
+  action :start
+end
+
+
+
+http://192.168.88.53
