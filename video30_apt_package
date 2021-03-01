@@ -8,9 +8,9 @@ https://docs.chef.io/resources/service/
 
 
 
-chef-apply install_packet.rb
+sudo chef-apply install_packet.rb
 
-package %w(ngnix htop) do
+package %w(nginx htop) do
   action :install
 end
 # :install
@@ -21,9 +21,9 @@ end
 
 
 
-chef-apply ser_up.rb
+sudo chef-apply ser_up.rb
 
-service 'ngnix' do
+service 'nginx' do
   action :start
 end
 
