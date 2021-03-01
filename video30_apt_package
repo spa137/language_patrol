@@ -1,13 +1,16 @@
 # SPA IT - мовний патруль
 # 
-[chef apt_package]
+[chef apt_package   service]
 https://docs.chef.io/resources/apt_package/
 https://docs.chef.io/resources/service/
 Привіт! Це мовний патруль та айті українською.
 
+Встановимо пакети nginx та htop
+(детальний опис - лінки на початку цього файла)
+Нагадаю, - отримати його необхідно з репозиторію
+Мовного_Патруля, з нашого гітхаба.
 
-
-
+Зверніть увагу- необхідні права суперюзера.
 sudo chef-apply install_packet.rb
 
 package %w(nginx htop) do
@@ -17,16 +20,20 @@ end
 # :remove
 # :purge
 # :upgrade
+За решіткою - деякі з можливих екшенів.
 
-
-
+Стартуємо nginx
 
 sudo chef-apply ser_up.rb
 
 service 'nginx' do
   action :start
 end
+# :disable
+# :reload
+# :start
 
+Перевіряємо роботу
 
 
 http://192.168.88.53
