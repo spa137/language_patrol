@@ -7,6 +7,10 @@
 Для цієї роботи необхідно встановити ніж шеф-кухаря.
 chef gem install knife-config
 
+Створемо теку та перейдемо до неї
+mkdir -p ~/Chef/cookbooks && cd ~/Chef/cookbooks
+
+
 Код, який наведено нижче, забезпечує
 встановлення nginx, створює файл з привітаннячком
 та здійснює перезапуск демона nginx.
@@ -38,7 +42,16 @@ end
 
 chef generate cookbook book1
 
-Записуэмо рецепт
+та шаблон вітання
+
+генеруємо шаблон
+chef generate template book1 index.html
+
+
+
+
+
+Записуємо рецепт
 
 /recipes/default.rb
 
@@ -61,12 +74,9 @@ end
 
 
 
-та шаблон вітання
 
-генеруємо шаблон
-chef generate template book1 index.html
 
-заповнюємо
+заповнюємо шаблон вітання
 
 
 nano index.html.erb
