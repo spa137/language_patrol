@@ -7,6 +7,11 @@
 Для цієї роботи необхідно встановити ніж шеф-кухаря.
 chef gem install knife-config
 
+Код, який наведено нижче, забезпечує
+встановлення nginx, створює файл з привітаннячком
+та здійснює перезапуск демона nginx.
+
+
 #sudo
 package 'nginx' do
   action :install
@@ -23,6 +28,59 @@ end
 service 'nginx' do
   action :reload
 end
+
+
+Але.
+Це зроблено не дуже елегантно,
+всупереч традиціям ШЕФ.
+
+Створемо першу книгу рецептів.
+
+chef generate cookbook book1
+
+Записуэмо рецепт
+
+/recipes/default.rb
+
+
+package 'nginx' do
+  action :install
+end
+
+
+template '/var/www/html/index.nginx-debian.html' do
+  source 'index.html.erb'
+end
+
+
+service 'nginx' do
+  action :reload
+end
+
+
+
+
+
+та шаблон вітання
+
+генеруємо шаблон
+chef generate template book1 index.html
+
+заповнюємо
+
+
+nano index.html.erb
+
+<html>
+  <body>
+    <h1>hello world</h1>
+  </body>
+</html>
+
+застосуємо рецепт
+
+sudo chef-client --local-mode --runlist 'recipe[book1]'
+
 
 
 
