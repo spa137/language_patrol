@@ -1,0 +1,10 @@
+# SPA IT - мовний патруль
+# 
+[chef_apply_windows]
+
+https://docs.chef.io/resources/chocolatey_package/
+
+chocolatey_package 'name of package' do
+  options '--checksum 1234567890'
+  action :install
+end
