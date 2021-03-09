@@ -1,0 +1,17 @@
+# SPA IT - мовний патруль
+# 
+[chef_apply_windows]
+
+клієнт
+https://downloads.chef.io/tools/infra-client
+
+
+
+https://docs.chef.io/resources/directory/
+
+runas /user:sw "chef-client 1.rb"
+
+directory 'C:\mordor' do
+  rights :read, 'Все'
+  rights :full_control, 'sw'
+end
