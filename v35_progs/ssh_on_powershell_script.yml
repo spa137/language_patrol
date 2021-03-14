@@ -1,0 +1,10 @@
+---
+- name: Run powershell script
+  hosts: all 
+  gather_facts: false
+  become: yes
+  become_user: sw
+  become_method: runas
+  tasks:
+    - name: Run powershell script
+      script: ./files/ssh_on.ps1

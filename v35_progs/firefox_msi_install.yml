@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+  - name: Download to specified path
+    win_get_url:
+      url: вставь путь
+      dest: C:\Users\%USERNAME%\firefox.msi
+  - name: Install product
+    win_package:
+      path: C:\Users\%USERNAME%\firefox.msi
+      state: present

@@ -1,0 +1,10 @@
+[spa it базовый курс]
+
+[windows]
+запуск
+ansible-playbook имя_файла.yml
+
+пинг
+ansible  -m win_ping all
+
+

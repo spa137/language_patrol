@@ -1,0 +1,9 @@
+---
+- name: share remove
+  hosts: all
+  gather_facts: false
+  tasks:    
+    - name: Remove share
+      ansible.windows.win_share:
+        name: company
+        state: absent

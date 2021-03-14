@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+  - name: get_status
+    raw: wmic diskdrive get status
+    register: get_status
+  - debug: msg="{{ get_status.stdout_lines }}"

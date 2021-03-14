@@ -1,0 +1,17 @@
+---
+- hosts: all
+  tasks:
+  - name: Install multiple packages sequentially
+    win_chocolatey:
+      name: '{{ item }}'
+      state: present
+    loop:
+    - sysinternals
+    - putty
+    - windirstat
+    - googlechrome
+    - firefox
+    - notepadplusplus.install
+    - vlc
+    - skype
+    - openoffice

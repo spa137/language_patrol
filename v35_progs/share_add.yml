@@ -1,0 +1,18 @@
+#тека повинна існувати
+---
+- name: Add share
+  hosts: all
+  gather_facts: false
+  tasks:  
+    - name: Create directory structure
+      ansible.windows.win_file:
+        path: C:\shares\spait
+        state: directory  
+    - name: Add public company share
+      ansible.windows.win_share:
+        name: company
+        description: share for sw_write
+        path: C:\shares\spait
+        list: yes
+        full: sw
+        read: Все
