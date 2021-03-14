@@ -1,7 +1,7 @@
 # SPA IT - мовний патруль
 # 
 [Ansible_Windows_share]
-
+ansible-galaxy collection install ansible.windows
 
 Мовний_Патруль 
 v34_progs
