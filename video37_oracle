@@ -1,0 +1,78 @@
+# SPA IT - мовний патруль
+# 
+[Oracle linux 8.3]
+
+Привіт!
+Це мовний патруль та IT українською.
+Подивимось на ще один стабільний дистрибутив
+на основі Red Hat Enterprise Linux з бескоштовними оновленнями
+Він знадобиться, якщо необхідно встановлювати RPM-пакунки.
+
+========================================================================================================
+uname -a
+
+
+# варіанти
+
+# 1. Red Hat Compatible Kernel (RHCK)
+
+# 2. Unbreakable Enterprise Kernel (UEK)*
+#     Oracle пропагує Unbreakable Enterprise Kernel як такий, що має 100% сумісність з RHEL
+#     хоча це по суті неможливо гарантувати
+
+На відміну від звичних нам, заснованих на Ubuntu дистрибутивах маємо:
+Yellowdog Updater, Modified (YUM) — відкритий консольний менеджер RPM-пакунків
+yum дуже схожа на apt
+Також oracle linux 8.3 має одночасно менеджер пакунків dnf 
+DNF (Dandified Yum) — "приодягений yum" менеджер пакунків, розроблений у проєкті Fedora на заміну Yum. 
+(має помітно вищу швидкість роботи і низьке споживання пам'яті)
+
+
+
+========================================================================================================
+Встановимо та видалемо редактор nano.
+
+
+sudo yum install nano                                                     sudo dnf install nano
+sudo yum remove nano                                                      sudo dnf remove nano
+
+
+
+
+Оновлення
+sudo yum check-update                         |         sudo dnf check-update 
+sudo yum update                                         sudo dnf update
+
+Встановити пакунок:
+sudo yum update Package_Name                  |         sudo dnf install ім'я_ пакунка
+
+Репозиторії, що наразі підключені 
+yum repolist                                  |         dnf repolist
+
+---
+перелік назв пакунків
+yum list                                      |         dnf list   
+
+
+
+
+
+sudo dnf  autoremove                          |         sudo dnf  autoremove
+
+
+
+========================================================================================================
+Відключення sudo shutdown
+
+
+-
+окремий пакунок .deb
+dpkg -i ім'я_пакунка.deb
+
+
+окремий пакунок rpm
+sudo rpm -i ім'я_пакунка.rpm
+
+
+
+
