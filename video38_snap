@@ -1,0 +1,85 @@
+# SPA IT - мовний патруль
+# 
+[snap]
+
+Привіт!
+Це мовний патруль та IT українською.
+Сьогодні знайомимось з менеджером пакунків snap.
+Пакунки snap мають, зазвичай більший розмір,
+бо містят повний набір компонент, необхідних застосунку.
+Такі пакунки безболісно встановлюють до системи,
+не переймаючись залежностями, тому, що все, що потрібно,
+вже є у пакунку.
+
+snap працююсть завдяки демону snapd
+systemctl status snapd
+
+Загалом, застосунки знаходяться у 
+https://snapcraft.io/store
+У моєї Lubuntu 20 04 застосунки, які рекомендовано 
+до встановлення, можна знайти за командою:
+snap find 
+Більш докладно про окремий пакунок:
+snap info docker (за мовчазної згоди встановлюється latest/stable:)
+Подивимось історію змін snap в системі
+snap changes
+Період автоматичного оновлення пакунків:
+snap refresh --time 
+
+
+  
+sudo snap install keepassxc
+keepassxc
+sudo snap remove keepassxc
+ 
+
+
+snap version                                  |   версія
+snap refresh --time                           |   інтервал оновлення пакунків
+sudo snap refresh                             |   онивити всі пакунки
+snap changes                                  |   що діялось в системі з пакунками
+
+snap help --all                               |   довідник
+
+
+snap list                                     |   перелік пакунків у системі
+snap find                                     |   пошук пакунків, які доступні для встановлення    
+snap remove ім'я_пакунку                      |   видалення пакунку
+sudo snap refresh ім'я_пакунку                |   оновити пакунок  
+sudo snap install ім'я_пакунку                |   встановлення пакунку
+sudo snap revert ім'я_пакунку                 |   відкат оновлень пакунків
+snap info ім'я_пакунку                        |   інформація про пакунок
+sudo snap disable ім'я_пакунку                |   відключити пакунок
+sudo snap enable ім'я_пакунку                 |   включити пакунок
+
+https://snapcraft.io/store
+
+
+s@s-pc:~$ snap info thunderbird 
+name:      thunderbird
+summary:   Mozilla Thunderbird email application
+publisher: Canonical✓
+store-url: https://snapcraft.io/thunderbird
+contact:   https://launchpad.net/distros/ubuntu/+source/thunderbird
+license:   MPL-2.0
+description: |
+  Thunderbird is a free and open source email, newsfeed, chat, and calendaring client, that’s easy
+  to set up and customize. One of the core principles of Thunderbird is the use and promotion of
+  open standards - this focus is a rejection of our world of closed platforms and services that
+  can’t communicate with each other. We want our users to have freedom and choice in how they
+  communicate.
+snap-id: k1Ml1O9GzSO2QftV0ZlWSbUfQ78nN460
+channels:
+  latest/stable:    78.9.1 2021-04-09 (119) 69MB -
+  latest/candidate: 78.9.1 2021-04-09 (119) 69MB -
+  latest/beta:      88.0b3 2021-04-15 (121) 75MB -
+  latest/edge:      ↑   
+
+sudo snap install minetest --edge
+
+
+---
+
+
+sudo snap install snap-store
+
