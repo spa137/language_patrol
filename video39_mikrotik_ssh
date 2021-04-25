@@ -1,0 +1,18 @@
+# SPA IT - мовний патруль
+# 
+[Mikrotik_ssh_key]
+https://wiki.mikrotik.com/wiki/Use_SSH_to_execute_commands_(public/private_key_login)
+
+Привіт!
+Це мовний патруль та IT українською.
+
+Сьогодні навчимось створювати ssh за допомогою ключів на MikroTik.
+Створюэмо юзера.
+Генеруємо пару ключів RSA.
+Завантажуэмо публічний ключ та надаємо його юзеру.
+
+
+
+ssh-keygen -t rsa
+
+cd /home/s/.ssh/  (s == username)
