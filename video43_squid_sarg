@@ -1,0 +1,40 @@
+# SPA IT - мовний патруль
+# 
+[squid & sarg]
+squid (англ. squid — «кальмар») — програмний пакет, що реалізує функцію кешуючого проксі-сервера.
+sarg - Squid Analysis Report Generator
+
+Привіт!
+Це мовний патруль та IT українською.
+Сьогодні знайомимось з проксі squid та застосунком з аналізу sarg.
+----------------------
+squid
+
+встановимо
+sudo apt install squid
+
+
+s@s-pc:~$ nmap 192.168.88.250
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-04-30 11:20 EEST
+Nmap scan report for 192.168.88.250
+Host is up (0.00058s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+3128/tcp open  squid-http
+
+
+sudo cat /var/log/squid/access.log файл логів squid
+
+----------------------
+sarg
+
+sudo apt install sarg
+
+sudo /usr/bin/sarg генерація звітів
+(SARG: Unknown option resolve_ip ===> resolve_ip yes)
+
+файл налаштувань sudo nano /etc/sarg/sarg.conf
+(Ctrl + W)
+
+cd var/lib/sarg/ тека звітів
