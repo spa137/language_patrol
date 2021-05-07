@@ -1,0 +1,53 @@
+# SPA IT - мовний патруль
+# 
+[unison]
+Ubuntu 20 04.
+Привіт!
+Це мовний патруль та IT українською.
+Сьогодні досліджуємо unison.
+Це застосунок, що синхронізує теки.
+
+
+Необхідно встановити unison на обидва хости.
+sudo apt install unison
+
+Цей застосунок працює за допомогою ssh з ключем
+(в "мовному патрулі" присутнє відео як це зробити за допомогою ssh-copy-id).
+
+
+   (ssh-keygen -t rsa)
+   ssh-copy-id  s@192.168.88.250
+   
+mkdir /home/s/data2  && cd /home/s/data2
+
+touch /home/s/data2/f1.txt && ll
+
+
+unison /home/s/data2 ssh://192.168.88.250//home/s/data2  -auto  -batch  
+
+***
+
+Версії повинні співпадати !
+Приклад помилки-
+   s@s-pc:~/data2$ unison /home/s/data2 ssh://192.168.88.238//home/s/data2      -auto  -batch 
+   Contacting server...                                                                                                                  
+   Fatal error: Received unexpected header from the server:                                                                              
+    expected "Unison 2.48\n" but received "Unison 2.51 with OCaml >=   4.01.2\n\000\000\000\000\017",                                      
+   which differs at "Unison 2.5".                                                                                                        
+   This can happen because you have different versions of Unison                                                                         
+   installed on the client and server machines, or because
+   your connection is failing and somebody is printing an error
+   message, or because your remote login shell is printing
+   something itself before starting Unison.
+
+
+
+
+
+
+
+
+
+---------------
+rmdir /home/s/data --ignore-fail-on-non-empty
+sudo chown -R $USER.$USER /home/s/data
