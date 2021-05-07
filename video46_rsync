@@ -1,0 +1,19 @@
+# SPA IT - мовний патруль
+# 
+[unison]
+Ubuntu 20 04.
+Привіт!
+Це мовний патруль та IT українською.
+Сьогодні досліджуємо rsync.
+
+Застосунок unison, який ми досліджували ранійше в "мовному_патрулі" 
+теж може робити резервні копії, але rsync використовувати трохи правильнійше.
+
+Застосунок вже встановлено.
+
+rsync --version
+rsync --archive --verbose --progress user@remotehost:/remote/source/ /local/destination/
+
+
+Вкажемо звідки та куди копіюємо.
+rsync --archive --verbose --progress s@192.168.88.250:/home/s/data2/ /home/s/data2/
